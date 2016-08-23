@@ -15,15 +15,17 @@ export default class Layout extends React.Component {
     }*/
     
     navigate(){
-        this.props.history.push(null,"/");
+        //console.log(this.props);
+        this.props.history.pushState(null,"/");
     }
 
   render() {
     return (
       <div>
-        <h1>Asset Management</h1>
-        <Link to='person'><button class="btn btn-success">person</button></Link>
-        <Link to='project'><button class="btn btn-danger">Project</button></Link>
+        <h1>Project Management</h1>
+        <Link to='team'><button class="btn btn-primary">Team Details</button></Link>
+        <Link to='asset'><button class="btn btn-info">Asset Details</button></Link>
+        <button class="btn btn-outline-success btn-xs" onClick={this.navigate.bind(this)}>Project Details</button>
         {this.props.children}
       </div>
     );
