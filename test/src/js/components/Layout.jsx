@@ -21,11 +21,11 @@ export default class Layout extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="Jumbotron">
         <h1>Project Management</h1>
-        <Link to='team'><button class="btn btn-primary">Team Details</button></Link>
-        <Link to='asset'><button class="btn btn-info">Asset Details</button></Link>
-        <button class="btn btn-outline-success btn-xs" onClick={this.navigate.bind(this)}>Project Details</button>
+        <Link to='team'><button className="btn btn-primary">Team Details</button></Link>
+        <Link to='asset'><button className="btn btn-success">Asset Details</button></Link>
+        <button className="btn btn-info btn-sm" onClick={this.navigate.bind(this)}>Project Details</button>
         {this.props.children}
       </div>
     );
