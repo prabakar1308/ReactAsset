@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-bootstrap';
 import TeamDetailStore from '../stores/TeamDetailStore.jsx';
 import * as TeamDetailAction from '../actions/TeamDetailAction.jsx';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
@@ -57,8 +58,10 @@ export default class TeamDetails extends React.Component {
         this.state={
             employees : TeamDetailStore.getAllEmployees(),
             name1 : 'default',
+            showModal: false,
         }; 
-    } 
+       // this.handleClick = this.handleClick.bind(this);
+    }
     
    componentWillMount(){
        TeamDetailStore.on('change',()=>{
@@ -68,8 +71,18 @@ export default class TeamDetails extends React.Component {
            console.log(this.state.employees);
        });
    }
-
+    
+//    handleClick() {
+//    console.log(this.state.showModal);
+//           this.setState({ showModal: true });
+//        console.log(this.state.showModal);
+//  }
+    
+   
   render() {
+      
+      
+          
     return (
         <div className="container-fluid">
         <div className="row">

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
+import Router from 'react-router';
 import {button} from 'react-bootstrap';
-
+import {Navbar,NavItem} from 'react-bootstrap';
 
 export default class Layout extends React.Component {
     
@@ -22,11 +23,17 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div class="Jumbotron">
-        <h1>Project Management</h1>
-        <Link to='team'><button className="btn btn-primary">Team Details</button></Link>
-        <Link to='asset'><button className="btn btn-success">Asset Details</button></Link>
-        <button className="btn btn-info btn-sm" onClick={this.navigate.bind(this)}>Project Details</button>
-        {this.props.children}
+        <h1 class="text-center">Project Management</h1>
+        <br/>
+      <Navbar>
+        <Link className="navbar-header" to='team'><button className="btn btn-primary">Team Details</button></Link>&nbsp;&nbsp;
+        <Link to='asset'><button className="btn btn-success">Asset Details</button></Link>&nbsp;&nbsp;
+          <Link to='yorbit'><button className="btn btn-success">Yorbit Details</button></Link>&nbsp;&nbsp;
+        <button className="btn btn-info btn-sm" onClick={ this.navigate.bind(this) }>Project Details</button>
+      </Navbar>
+    
+        { this.props.children }
+    
       </div>
     );
   }

@@ -6,6 +6,7 @@ import Layout from './components/Layout.jsx';
 import ProjectDetails from './components/ProjectDetails.jsx';
 import TeamDetails from './components/TeamDetails.jsx';
 import AssetDetails from './components/AssetDetails.jsx';
+import YorbitModal from './components/YorbitModal.jsx';
 
 const app = document.getElementById( 'app' );
 
@@ -14,5 +15,6 @@ ReactDOM.render( <Router history={hashHistory}>
                 <IndexRoute component={ProjectDetails}></IndexRoute>
                 <Route path='team' component={TeamDetails}></Route>
                 <Route path='asset' component={AssetDetails}></Route>
+                <Route path='yorbit' component={YorbitModal}></Route>
                 </Route>
                 </Router>, app );

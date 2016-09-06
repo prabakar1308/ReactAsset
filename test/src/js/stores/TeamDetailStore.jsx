@@ -50,11 +50,14 @@ import dispatcher from '../dispatcher.js'
              case "CREATE_TODO":
                  {
                      this.insertEmployee(action.data);
+                     break;
                  }
                  case "DELETE_TODO":
                  {
                      this.deleteEmployee(action.index);
+                     break;
                  }
+             default:break;
          }
      }
 }
