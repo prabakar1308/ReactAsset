@@ -2,7 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import Router from 'react-router';
 import {button} from 'react-bootstrap';
-import {Navbar,NavItem} from 'react-bootstrap';
+import {Nav, Navbar, NavItem} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+
 
 export default class Layout extends React.Component {
     
@@ -23,18 +25,27 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div class="Jumbotron">
-        <h1 class="text-center">Project Management</h1>
-        <br/>
-      <Navbar>
-        <Link className="navbar-header" to='team'><button className="btn btn-primary">Team Details</button></Link>&nbsp;&nbsp;
-        <Link to='asset'><button className="btn btn-success">Asset Details</button></Link>&nbsp;&nbsp;
-          <Link to='yorbit'><button className="btn btn-success">Yorbit Details</button></Link>&nbsp;&nbsp;
-        <button className="btn btn-info btn-sm" onClick={ this.navigate.bind(this) }>Project Details</button>
-      </Navbar>
-    
-        { this.props.children }
+        <div className="row">
+           <Navbar fixedTop>
+            
+            <div class="navbar-header">
+                <a class="navbar-brand">Project Management</a>
+            </div>
+                
+            <Nav bsStyle="tabs" activeKey={1} pullRight>
+                <LinkContainer to="team"><NavItem eventKey={1}>Team Details</NavItem></LinkContainer>
+                <LinkContainer to="asset"><NavItem eventKey={1}>Asset Details</NavItem></LinkContainer>
+                <LinkContainer to="yorbit"><NavItem eventKey={1}>Yorbit</NavItem></LinkContainer>
+                <NavItem onClick={this.navigate.bind(this)}>Home</NavItem>
+            </Nav>
+                
+           </Navbar> 
+         </div>
+        <div><br/><br/><br/></div>
+        <div className="row">{ this.props.children }</div>
     
       </div>
+            
     );
   }
 
