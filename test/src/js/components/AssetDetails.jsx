@@ -3,7 +3,9 @@ export default class AssetDetails extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="row">
+        <div className="col-sm-1"></div>
+        <div className="col-sm-10">
         <h3>Asset Details</h3>
         <table class="table table-striped">
   <thead>
@@ -36,6 +38,8 @@ export default class AssetDetails extends React.Component {
   </tbody>
 </table>
       </div> 
+             <div className="col-sm-1"></div>
+        </div>
     );
   }
 
