@@ -7,6 +7,7 @@ export default class YorbitPerson extends React.Component{
     
       constructor(){
         super();
+          console.log(this.props.selectedData);
         this.state={
             showStatus: false,
             showCurrentStatus: false,
