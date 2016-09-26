@@ -19,7 +19,7 @@ import dispatcher from '../dispatcher.js'
                 Yorbit101_Status:'100',
                 Yorbit201: 'Requested for AngularJS 201 Course',
                 Yorbit201: '',
-                image:'praba',
+                ImageUrl:'../images/ramesh.jpg',
     },
             {
                 id: 2,
@@ -35,7 +35,7 @@ import dispatcher from '../dispatcher.js'
                 Yorbit101_Status:'100',
                 Yorbit201: 'Requested for AngularJS 201 Course',
                 Yorbit201: '',
-                image:'ramesh',
+                ImageUrl:'../images/praba.jpg',
     
     },
         ];

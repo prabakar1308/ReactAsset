@@ -7,7 +7,6 @@ export default class YorbitPerson extends React.Component{
     
       constructor(){
         super();
-          console.log(this.props.selectedData);
         this.state={
             showStatus: false,
             showCurrentStatus: false,
@@ -34,6 +33,8 @@ export default class YorbitPerson extends React.Component{
     }
 
   render() {    
+      
+      
 
     return (    
         
@@ -41,10 +42,10 @@ export default class YorbitPerson extends React.Component{
             <div className="col-sm-2"></div>
              <div className="col-sm-4">
                 
-        <Thumbnail src="../images/praba.jpg" alt="10x10" >
-            <h3>Prabakaran Arumugam</h3>
-            <p>Senior Software Engineer</p>
-            <p>Project DOJ : 23-07-2014</p>
+        <Thumbnail src={this.props.data.ImageUrl} alt="10x10" >
+            <h3>{this.props.data.name}</h3>
+            <p>{this.props.data.Designation}</p>
+            <p>{this.props.data.DOJ}</p>
             <p>
                 <Button bsStyle="primary" onClick={this.getStatus}>Complete Status</Button>&nbsp;&nbsp;
                 <Button bsStyle="info" onClick={this.getCurrentStatus}>Current Status</Button>&nbsp;&nbsp;
