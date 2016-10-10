@@ -14,6 +14,13 @@ export default class ProjectDetails extends React.Component {
         <div className="col-sm-8">
             
             <Carousel style={{color: "black", width:"100%", height: "300px"}}>
+     <CarouselItem>
+         <div className="row">
+      <div className="col-sm-12">
+      <img width={910} height={300} alt="900x500" src="../images/Time_Inc1.jpg"/>
+           </div>
+      </div>
+    </CarouselItem>
     <CarouselItem>
         <br/>
       <div className="row">

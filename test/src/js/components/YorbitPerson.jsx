@@ -8,7 +8,7 @@ export default class YorbitPerson extends React.Component{
       constructor(){
         super();
         this.state={
-            showStatus: false,
+            showStatus: true,
             showCurrentStatus: false,
         }; 
           

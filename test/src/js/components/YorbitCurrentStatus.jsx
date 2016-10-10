@@ -17,7 +17,8 @@ export default class YorbitCurrentStatus extends React.Component{
              <ProgressBar striped bsStyle="success" now={now} label={`${now}%`}/>
             
             <a>Yorbit 201 : </a>
-            <p>Angular JS : Approved by CDM & waiting for C2 to process.</p>
+            <p>Angular JS : Started with Angular 201 Course.</p>
+            <ProgressBar striped bsStyle="success" now={15} label={`${15}%`}/>
         </Panel>
             
     );

@@ -40,9 +40,6 @@ export default class YorbitModal extends React.Component{
           this.clear = this.clear.bind(this);
            this.handleSelect = this.handleSelect.bind(this);
     }
-       
-    
-  
 
     
      componentWillMount(){
@@ -57,7 +54,7 @@ export default class YorbitModal extends React.Component{
     
 
   handleSelect(evt) {
-     console.log(evt);
+     console.log('event');
       var key = this.refs.table.state.selectedRowKeys[0];
       var data = this.refs.table.state.data;
       var selected = data.filter(function ( obj ) {
@@ -74,6 +71,11 @@ export default class YorbitModal extends React.Component{
 
   render() {       
  
+       var options = {
+      sizePerPageList: [5,10,15], //you can change the dropdown list for size per page
+      sizePerPage: 5,  //which size per page you want to locate as default
+      paginationSize: 3,  //the pagination bar size.
+    }
 
     return (
     <div>
@@ -81,8 +83,8 @@ export default class YorbitModal extends React.Component{
             <div className="col-sm-2"></div>
             <div className="col-sm-8">
             
-                <BootstrapTable ref='table' data={ this.state.employees } selectRow={selectRowProp} search={true}
-        striped={true} hover={true}  height='120' width='150'>
+                <BootstrapTable ref='table' data={ this.state.employees } options={options} selectRow={selectRowProp} onRowSelect={this.handleSelect} search={true}
+        striped={true} hover={true}  height='100%' width='150' pagination={true}>
         <TableHeaderColumn width='140' dataField='id' isKey={ true }>Employee Id</TableHeaderColumn>
         <TableHeaderColumn width='140' dataField='name'  dataSort={true}>Name</TableHeaderColumn>
         <TableHeaderColumn width='140' dataField='track'>Track</TableHeaderColumn>
@@ -91,25 +93,25 @@ export default class YorbitModal extends React.Component{
                 
             </div>
              
-            <div className="col-sm-2">
-                <div className="row"><br/><br/></div>
-                <div className="row">
-                    <div className="col-sm-1"></div>
-                <div className="col-sm-10">
-                    <button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.handleSelect}>Get Details</button>
-                </div>
-                <div className="col-sm-1"></div>
-                </div>
-                <div className="row"></div>
+            <div className="col-sm-2">             
             
                
             </div>
+            <br/><br/>
+             <div className="row">
+                    <div className="col-sm-8"></div>
+                <div className="col-sm-2">
+                    <button type="button" className="btn btn-primary pull-right" onClick={this.handleSelect}>Get Details</button>
+                </div>
+                <div className="col-sm-2"></div>
+                </div>
+            
         </div>
             
         <br/><br/>
             
         
-                { this.state.showDetail ? <YorbitPerson data={this.state.selectedData} show={false}/> : null }
+                { this.state.showDetail ? <YorbitPerson data={this.state.selectedData} /> : null }
             
             
     </div>
