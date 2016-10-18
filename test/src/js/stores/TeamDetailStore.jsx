@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events';
-import dispatcher from '../dispatcher.js'
+import dispatcher from '../dispatcher.js';
+import teamService from '../services/TeamService.js';
 
  class TeamDetailStore extends EventEmitter{
     constructor(){
@@ -110,15 +111,23 @@ import dispatcher from '../dispatcher.js'
     }
     
     getAllEmployees(){
-        return this.employees;
+        teamService.getTeamDetails().then(function (res) {
+            console.log('Api ----> '+ res[0].name);
+            return res;
+        });
+        //return this.employees;
     }
      
     
      
      insertEmployee(employee){
-         console.log('add');
-         this.employees.push(employee);
-             this.emit("change");
+         /*console.log('add');
+         this.employees.push(employee);*/
+          teamService.addPerson(employee).then(function (res) {
+            console.log('add -----> '+res);
+               this.emit("change");
+        });
+            // this.emit("change");
      }
      
      deleteEmployee(index){
