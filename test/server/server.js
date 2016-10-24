@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -39,11 +39,22 @@ MongoClient.connect('mongodb://employee:employee@ds015774.mlab.com:15774/employe
 
  app.get('/', (req, res) => {
     console.log('get Method');
-  var cursor = db.collection('EmployeeList').find().toArray(function (err, items) {
+  var cursor = db.collection('EmployeeList').find({}, {_id:0}).toArray(function (err, items) {
       console.log(items);
-                res.send(items);
+                res.json(items);
             });
-     console.log(cursor);
+     console.log('cursor  === ' +cursor);
+});
+
+app.post('/insert', (req, res) => {
+     console.log('Insert');
+    console.log(req.body.name);
+  db.collection('EmployeeList').save(req.body, (err, result) => {
+    if (err) return console.log(err)
+
+    console.log('saved to database')
+//    res.redirect('/')
+  })
 });
 
 /* app.listen(3000, function() {

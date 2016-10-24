@@ -1,4 +1,5 @@
 import {EventEmitter} from 'events';
+import axios from 'axios';
 import dispatcher from '../dispatcher.js';
 import teamService from '../services/TeamService.js';
 
@@ -111,23 +112,34 @@ import teamService from '../services/TeamService.js';
     }
     
     getAllEmployees(){
-        teamService.getTeamDetails().then(function (res) {
+        /*teamService.getTeamDetails().then(function (res) {
             console.log('Api ----> '+ res[0].name);
             return res;
-        });
-        //return this.employees;
+        });*/
+        var res;
+        setTimeout(() => {
+        axios.get('http://localhost:3000')
+  .then(function(response){
+             console.log('store');
+    console.log(response.data); // ex.: { user: 'Your User'}
+   res = response.data;
+  });
+        },8000);
+        
+    return res;
     }
      
     
      
      insertEmployee(employee){
-         /*console.log('add');
-         this.employees.push(employee);*/
-          teamService.addPerson(employee).then(function (res) {
-            console.log('add -----> '+res);
-               this.emit("change");
-        });
-            // this.emit("change");
+         console.log('add');
+         console.log(employee);
+//         this.employees.push(employee);
+         axios.post('http://localhost:3000/insert', employee)
+  .then(function(response){
+    console.log('saved successfully')
+  }); 
+             //this.emit("change");
      }
      
      deleteEmployee(index){

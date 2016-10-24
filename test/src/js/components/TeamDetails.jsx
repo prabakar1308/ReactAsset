@@ -1,8 +1,10 @@
 import React from 'react';
 import Button from 'react-bootstrap';
+import axios from 'axios';
 import TeamDetailStore from '../stores/TeamDetailStore.jsx';
 import * as TeamDetailAction from '../actions/TeamDetailAction.jsx';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+
 
 
 var selectRowProp = {
@@ -55,28 +57,52 @@ export default class TeamDetails extends React.Component {
     
     constructor(){
         super();
-        this.state={
-            employees : TeamDetailStore.getAllEmployees(),
+        /*axios.get('http://localhost:3000')
+  .then(function(response){
+    console.log(response.data); // ex.: { user: 'Your User'}
+    console.log(response.status); // ex.: 200
+             this.state={
+            employees : response.data,
             name1 : 'default',
             showModal: false,
         }; 
+  });*/
+         this.state={
+            employees : [],
+            name1 : 'default',
+            showModal: false,
+        }; 
+        
+        /*TeamDetailStore.getAllEmployees().then(function (res) {
+            console.log(res);
+            this.setState({
+               employees : res,
+           });
+            console.log(this.state.employees);
+        });*/
        // this.handleClick = this.handleClick.bind(this);
     }
     
    componentWillMount(){
+       
+      axios.get('http://localhost:3000')
+  .then(function(response){
+    console.log(response.data); // ex.: { user: 'Your User'}
+   this.setState({
+               employees : response.data,
+           });
+  }.bind(this));
+
+       
        TeamDetailStore.on('change',()=>{
            this.setState({
                employees : TeamDetailStore.getAllEmployees(),
            });
            console.log(this.state.employees);
        });
-   }
+   
+}
     
-//    handleClick() {
-//    console.log(this.state.showModal);
-//           this.setState({ showModal: true });
-//        console.log(this.state.showModal);
-//  }
     
    
   render() {
