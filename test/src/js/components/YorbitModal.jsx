@@ -33,9 +33,15 @@ export default class YorbitModal extends React.Component{
         super();
         this.state={
             showDetail: false,
-            employees : TeamDetailStore.getAllEmployees(),
+            employees : [],
             selectedData : {},
         }; 
+          
+          TeamDetailStore.getYorbitDetails().then(function (res) {
+             this.setState({
+               employees : res.data,
+           });
+  }.bind(this));
           
           this.clear = this.clear.bind(this);
            this.handleSelect = this.handleSelect.bind(this);
@@ -44,10 +50,11 @@ export default class YorbitModal extends React.Component{
     
      componentWillMount(){
        TeamDetailStore.on('change',()=>{
-           this.setState({
-               employees : TeamDetailStore.getAllEmployees(),
+           TeamDetailStore.getAllEmployees().then(function (res) {
+             this.setState({
+               employees : res.data,
            });
-           console.log(this.state.employees);
+  }.bind(this));
        });         
       
    }    

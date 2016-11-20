@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events';
 import axios from 'axios';
+import Q from 'q';
 import dispatcher from '../dispatcher.js';
 import teamService from '../services/TeamService.js';
 
@@ -111,54 +112,80 @@ import teamService from '../services/TeamService.js';
         ];
     }
     
-    getAllEmployees(){
+//Function to get all employee records     
+getAllEmployees(){
         /*teamService.getTeamDetails().then(function (res) {
             console.log('Api ----> '+ res[0].name);
             return res;
         });*/
+        var deferred = Q.defer();
         var res;
-        setTimeout(() => {
-        axios.get('http://localhost:3000')
-  .then(function(response){
+        axios.get('http://localhost:3000').then(function(response){
              console.log('store');
-    console.log(response.data); // ex.: { user: 'Your User'}
-   res = response.data;
+                console.log(response.data); // ex.: { user: 'Your User'}
+                deferred.resolve(response);
   });
-        },8000);
         
-    return res;
-    }
+    return deferred.promise;
+}
      
     
-     
-     insertEmployee(employee){
-         console.log('add');
-         console.log(employee);
-//         this.employees.push(employee);
-         axios.post('http://localhost:3000/insert', employee)
+//Function to insert new employee record
+insertEmployee(employee){
+  axios.post('http://localhost:3000/insert', employee)
   .then(function(response){
-    console.log('saved successfully')
+             alert(response.data.message);
+    //this.emit("change");
   }); 
-             //this.emit("change");
-     }
+}
      
-     deleteEmployee(index){
-         console.log(index);
-         console.log('delete');
-         this.employees.splice(index,1);
-     }
+//Function to remove employee record
+deleteEmployee(id){         
+  axios.post('http://localhost:3000/delete',id)
+  .then(function(response){
+          alert(response.data.message);
+  }); 
+}
      
-     handleActions(action){
+//Function to update employee record
+updateEmployee(employee){
+  axios.post('http://localhost:3000/update', employee)
+  .then(function(response){
+           alert(response.data.message);
+  }); 
+}
+     
+     
+//Function to get all employee records     
+getYorbitDetails(){
+        var deferred = Q.defer();
+        var res;
+        axios.get('http://localhost:3000/getYorbitDetails').then(function(response){
+             console.log('yorbit store');
+                console.log(response.data); // ex.: { user: 'Your User'}
+                deferred.resolve(response);
+  });
+        
+    return deferred.promise;
+}
+     
+     
+handleActions(action){
          console.log(action.type);
          switch(action.type){
-             case "CREATE_TODO":
+             case "CREATE_EMP":
                  {
                      this.insertEmployee(action.data);
                      break;
                  }
-                 case "DELETE_TODO":
+                 case "DELETE_EMP":
                  {
-                     this.deleteEmployee(action.index);
+                     this.deleteEmployee(action.data);
+                     break;
+                 }
+                 case "UPDATE_EMP":
+                 {
+                     this.updateEmployee(action.data);
                      break;
                  }
              default:break;

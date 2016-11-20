@@ -2,13 +2,20 @@ import dispatcher from '../dispatcher.js';
 
 export function insertEmployee(employee){
     dispatcher.dispatch({
-        type:"CREATE_TODO",data:employee,
+        type:"CREATE_EMP",data:employee,
     });
 };
     
-    export function deleteEmployee(idx){
-        console.log(idx);
+    export function deleteEmployee(employee){
+        console.log(employee);
     dispatcher.dispatch({
-        type:"DELETE_TODO",index:idx,
+        type:"DELETE_EMP",data:employee,
+    });
+};
+
+ export function updateEmployee(employee){
+        console.log(employee);
+    dispatcher.dispatch({
+        type:"UPDATE_EMP",data:employee,
     });
 };

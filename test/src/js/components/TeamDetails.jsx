@@ -26,15 +26,35 @@ function onInsertEmployee(employee){
 }
 
 function onDeleteEmployee(employee){
-    console.log(employee[0]);
-    var index = getIndex(employee[0]);
-    console.log(index);
-    TeamDetailAction.deleteEmployee(index);
+    console.log(employee);
+    //var index = getIndex(employee[0]);
+    TeamDetailAction.deleteEmployee(employee);
 }
 
 var cellEditProp = {
     mode:"dbclick",
-    blurToSave:true
+    blurToSave:true,
+  beforeSaveCell: onBeforeSaveCell, // a hook for before saving cell
+  afterSaveCell: onAfterSaveCell  // a hook for after saving cell
+}
+
+function onBeforeSaveCell(row, cellName, cellValue) {
+    console.log('Before');
+    console.log(row);
+    console.log(cellName);
+    console.log(cellValue);
+    if(cellValue.length > 0)
+        return true;
+    else
+        return false;
+}
+
+function onAfterSaveCell(row, cellName, cellValue) {
+    console.log('After');
+    console.log(row);
+    console.log(cellName);
+    console.log(cellValue);
+    TeamDetailAction.updateEmployee(row);
 }
 
 function onRowSelect(row, isSelected){
@@ -57,56 +77,36 @@ export default class TeamDetails extends React.Component {
     
     constructor(){
         super();
-        /*axios.get('http://localhost:3000')
-  .then(function(response){
-    console.log(response.data); // ex.: { user: 'Your User'}
-    console.log(response.status); // ex.: 200
-             this.state={
-            employees : response.data,
-            name1 : 'default',
-            showModal: false,
-        }; 
-  });*/
-         this.state={
+        
+        this.state={
             employees : [],
             name1 : 'default',
             showModal: false,
         }; 
         
-        /*TeamDetailStore.getAllEmployees().then(function (res) {
-            console.log(res);
-            this.setState({
-               employees : res,
-           });
-            console.log(this.state.employees);
-        });*/
-       // this.handleClick = this.handleClick.bind(this);
-    }
-    
-   componentWillMount(){
-       
-      axios.get('http://localhost:3000')
-  .then(function(response){
-    console.log(response.data); // ex.: { user: 'Your User'}
-   this.setState({
-               employees : response.data,
+          TeamDetailStore.getAllEmployees().then(function (res) {
+             this.setState({
+               employees : res.data,
            });
   }.bind(this));
-
-       
+    
+    }
+    
+   componentWillMount(){    
+     
        TeamDetailStore.on('change',()=>{
-           this.setState({
-               employees : TeamDetailStore.getAllEmployees(),
+          TeamDetailStore.getAllEmployees().then(function (res) {
+             this.setState({
+               employees : res.data,
            });
-           console.log(this.state.employees);
+  }.bind(this));
        });
    
 }
     
     
    
-  render() {
-      
+  render() {    
       
           
     return (

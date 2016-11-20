@@ -5,7 +5,7 @@ const now = 100;
 
 export default class YorbitCurrentStatus extends React.Component{
     
-      
+
 
   render() {    
 
@@ -13,8 +13,8 @@ export default class YorbitCurrentStatus extends React.Component{
         
         <Panel header="Yorbit Current Status" bsStyle="info" style={{height: "400px"}}>
             <a>Yorbit 101 : </a>
-            <p>Angular JS : Completed</p>
-             <ProgressBar striped bsStyle="success" now={now} label={`${now}%`}/>
+            <p>{this.props.data.Yorbit101} : </p>
+             <ProgressBar striped bsStyle="success" now={now} label={`${90}%`}/>
             
             <a>Yorbit 201 : </a>
             <p>Angular JS : Started with Angular 201 Course.</p>
