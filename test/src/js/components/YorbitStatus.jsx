@@ -1,11 +1,26 @@
 import React from 'react';
 import {Panel} from 'react-bootstrap';
 
+var text = "";
+
 export default class YorbitStatus extends React.Component{
     
-      
+      componentWillMount(){ 
+       
+console.log('text');
+        
+        var i;
+        for (i = 0; i < this.props.data.length; i++) {
+            console.log(this.props.data.length);
+            console.log(this.props.data[i].Yorbit101);
+            text += "<a>" + this.props.data[i].Yorbit101 + "</a> : <b>"+this.props.data[i].Yorbit101_Status +" </b><br>";
+        }
+          console.log(text);
+       }
 
-  render() {    
+  render() {  
+      
+       
 
     return (    
         
@@ -16,10 +31,7 @@ export default class YorbitStatus extends React.Component{
             <a>Yorbit 101 : In Progress</a>
             <p>React JS, C# Basics & MVC</p>
             
-            <a>Yorbit 201 : Completed</a>
-            <p>NA</p>
-            <a>Yorbit 201 : In Progress</a>
-            <p>Angular JS</p>
+            <div dangerouslySetInnerHTML={{__html: text}} />
         </Panel>
             
     );

@@ -8,7 +8,7 @@ export default class YorbitPerson extends React.Component{
       constructor(){
         super();
         this.state={
-            showStatus: true,
+            showStatus: false,
             showCurrentStatus: false,
             yorbitDetails: [],
         }; 
@@ -29,10 +29,10 @@ export default class YorbitPerson extends React.Component{
     }
     
     getCurrentStatus(){
-        console.log(this.props.data.yorbit_details[0]);
+        console.log(this.props.data.yorbit_details);
       this.setState({showStatus:false,
                     showCurrentStatus:true,
-                    yorbitDetails:this.props.data.yorbit_details[0]});
+                    yorbitDetails:this.props.data.yorbit_details});
     }
 
   render() {    
@@ -59,7 +59,7 @@ export default class YorbitPerson extends React.Component{
                 </div>
             <div className="col-sm-4">
                 { this.state.showCurrentStatus ? <YorbitCurrentStatus data={this.state.yorbitDetails}/> : null }
-                 { this.state.showStatus ? <YorbitStatus /> : null }
+                 { this.state.showStatus ? <YorbitStatus data={this.state.yorbitDetails}/> : null }
             
             </div>
             <div className="col-sm-2"></div>
