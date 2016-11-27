@@ -1,17 +1,62 @@
 import React from 'react';
 import {Thumbnail,Well,Button} from 'react-bootstrap';
+import TeamDetailStore from '../stores/TeamDetailStore.jsx';
 
 export default class AssetDetails extends React.Component {
+    
+    
     
       constructor(){
         super();
         this.state= {
+            assetData:[],
             isLaptop:false,
             isDatacard:false,
         };
+          
+          TeamDetailStore.getAssetDetails().then(function (res) {
+             this.setState({
+               assetData : res.data,
+           });             
+               
+              
+  }.bind(this));
     }
 
   render() {
+      
+      var laptopDetails = [];
+      var datacardDetails = [];
+      var laptopCount = 0;
+      var datacardCount = 0;
+      var asset = this.state.assetData;
+              console.log(asset);
+for (var i = 0; i < asset.length; i++) {
+    laptopCount++;
+    if(asset[i].Type == 'Laptop'){
+    laptopDetails.push( <tr>
+        <td>{laptopCount}</td>
+        <td>{asset[i].Company}</td>
+        <td>{asset[i].Number}</td>
+        <td>{asset[i].Model}</td>
+            <td>{asset[i].Owner}</td>
+            <td>{asset[i].CurrentOwner}</td>
+      </tr>);
+    }
+    else if(asset[i].Type == 'Datacard'){
+        datacardCount++;
+        datacardDetails.push( <tr>
+        <td>{datacardCount}</td>
+        <td>{asset[i].Company}</td>
+        <td>{asset[i].Number}</td>
+        <td>{asset[i].Model}</td>
+            <td>{asset[i].Owner}</td>
+            <td>{asset[i].CurrentOwner}</td>
+      </tr>);
+    }
+}
+     
+      
     return (
     <div>
       <div className="row"><br/>
@@ -43,26 +88,14 @@ export default class AssetDetails extends React.Component {
                             <tr>
                                 <th>#</th>
                                 <th>Company</th>
+                                <th>Laptop No.</th>
                                 <th>Model</th>
                                 <th>Owner</th>
                                 <th>Currently with</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Lenovo</td>
-                                <td>LT123</td>
-                                <td>Ramesh</td>
-                                <td>Ramesh</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>HP</td>
-                                <td>LT122</td>
-                                <td>Praba</td>
-                                <td>Praba</td>
-                            </tr>   
+                           {laptopDetails}
                         </tbody>
                         </table>
                     </Well>
@@ -77,28 +110,16 @@ export default class AssetDetails extends React.Component {
                <table class="table table-striped">
   <thead>
     <tr>
-      <th>#</th>
+      <th>#</th>        
       <th>Company</th>
+        <th>Dongle No.</th>
       <th>Model</th>
       <th>Owner</th>
       <th>Currently with</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Airtel</td>
-      <td>4G</td>
-      <td>Ramesh</td>
-      <td>Ramesh</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Vodafone</td>
-      <td>3G</td>
-      <td>Praba</td>
-        <td>Praba</td>
-    </tr>   
+      {datacardDetails}  
   </tbody>
 </table>
             </Well>

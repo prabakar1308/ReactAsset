@@ -102,6 +102,41 @@ app.post('/update', (req, res) => {
      console.log('cursor  === ' +cursor);
 });
 
+app.get('/getAssetDetails', (req, res) => {
+    console.log('get Method');
+   var cursor = db.collection('AssetDetails').find({}, {_id:0}).toArray(function (err, items) {
+      console.log(items);
+                res.json(items);
+            });
+});
+
+
+
+ app.get('/getTeamCountByTrackWise', (req, res) => {
+  var cursor = db.collection('EmployeeList').aggregate([
+    {"$group" : {_id:null, value:{$sum:1},"track set":{$push:"$track"}}},{$unwind:"$track set"},{$group:{
+        "_id":{"label":"$track set","total":"$value"},
+        "count":{$sum:1}}},
+    {$project:{
+        "label":"$_id.label",
+        "value":{$multiply:[{$divide:["$count","$_id.total"]},100]}}}
+]).toArray(function (err, items) {
+      console.log(items);
+                res.json(items);
+            });
+     console.log('cursor  === ' +cursor);
+});
+
+app.get('/getAssetCount', (req, res) => {
+  var cursor = db.collection('AssetDetails').aggregate([
+    {"$group" : {_id:"$Type", y:{$sum:1}}}
+]).toArray(function (err, items) {
+      console.log(items);
+                res.json(items);
+            });
+     console.log('cursor  === ' +cursor);
+});
+
 /* app.listen(3000, function() {
   console.log('listening on 3000')
 });

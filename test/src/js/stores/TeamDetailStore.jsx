@@ -169,6 +169,44 @@ getYorbitDetails(){
     return deferred.promise;
 }
      
+     //Function to get all employee records     
+getAssetDetails(){
+        var deferred = Q.defer();
+        var res;
+        axios.get('http://localhost:3000/getAssetDetails').then(function(response){
+             console.log('Asset store');
+                console.log(response.data); // ex.: { user: 'Your User'}
+                deferred.resolve(response);
+  });
+        
+    return deferred.promise;
+}
+     
+     //Function to get all employee records     
+getTeamCountByTrackWise(){
+        var deferred = Q.defer();
+        var res;
+        axios.get('http://localhost:3000/getTeamCountByTrackWise').then(function(response){
+             console.log('chart store');
+                console.log(response.data); // ex.: { user: 'Your User'}
+                deferred.resolve(response);
+  });
+        
+    return deferred.promise;
+}
+     
+     getAssetCount(){
+        var deferred = Q.defer();
+        var res;
+        axios.get('http://localhost:3000/getAssetCount').then(function(response){
+             console.log('Asset chart store');
+                console.log(response.data); // ex.: { user: 'Your User'}
+                deferred.resolve(response);
+  });
+        
+    return deferred.promise;
+}
+     
      
 handleActions(action){
          console.log(action.type);

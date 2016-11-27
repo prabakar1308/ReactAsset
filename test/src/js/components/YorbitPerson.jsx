@@ -25,7 +25,8 @@ export default class YorbitPerson extends React.Component{
     
     getStatus(){
       this.setState({showStatus:true,
-                    showCurrentStatus:false}); 
+                    showCurrentStatus:false,
+                    yorbitDetails:this.props.data.yorbit_details}); 
     }
     
     getCurrentStatus(){
@@ -33,6 +34,11 @@ export default class YorbitPerson extends React.Component{
       this.setState({showStatus:false,
                     showCurrentStatus:true,
                     yorbitDetails:this.props.data.yorbit_details});
+    }
+    
+    componentWillMount(){ 
+         this.setState({showStatus:false,
+                    showCurrentStatus:false});  
     }
 
   render() {    

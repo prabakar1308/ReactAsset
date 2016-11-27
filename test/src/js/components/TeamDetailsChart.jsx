@@ -1,5 +1,6 @@
 import React from 'react';
 import rd3 from 'react-d3';
+import TeamDetailStore from '../stores/TeamDetailStore.jsx';
 
 var BarChart = rd3.BarChart;
 var LineChart = rd3.LineChart;
@@ -15,8 +16,14 @@ export default class TeamDetailsChart extends React.Component{
     constructor(){
         super();
         this.state = {
-            pieData : [{label: "MS Track", value: 30}, {label: "Java Track", value: 30}, {label: "QA Track", value: 30 }, {label: "DB Track", value: 10 }],
+            pieData : [],
         };
+        console.log('Chart Constructor');
+        TeamDetailStore.getTeamCountByTrackWise().then(function (res) {
+             this.setState({
+               pieData : res.data,
+           });
+  }.bind(this));
     }
     
     render(){
