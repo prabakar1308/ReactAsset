@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser= require('body-parser');
-const MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient;
+const round = require('mongo-round');
 
 const app = express();
 
@@ -119,7 +120,7 @@ app.get('/getAssetDetails', (req, res) => {
         "count":{$sum:1}}},
     {$project:{
         "label":"$_id.label",
-        "value":{$multiply:[{$divide:["$count","$_id.total"]},100]}}}
+        "value":round({$multiply:[{$divide:["$count","$_id.total"]},100]},1)}}
 ]).toArray(function (err, items) {
       console.log(items);
                 res.json(items);
